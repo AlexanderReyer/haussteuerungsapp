@@ -45,8 +45,8 @@ public class TCPConn implements Runnable{
             OutputStream outp = conn.getOutputStream();
             InputStream inp = conn.getInputStream();
 
-            Log.d("toogle_yeelight", "gesendet: " + ("{ \"id\": 1, \"method\": \"set_power\", \"params\":[\"" + i + "\", \"smooth\", 500]} \r\n"));
-            strOutput += ("{ \"id\": 1, \"method\": \"set_power\", \"params\":[\"" + i + "\", \"smooth\", 500]} \r\n");
+            Log.d("toogle_yeelight", "gesendet: " + ("{ \"id\": 1, \"method\": \"toggle\", \"params\":[\"" + i + "\", \"smooth\", 500]} \r\n"));
+            strOutput += ("{ \"id\": 1, \"method\": \"toggle\", \"params\":[\"" + i + "\", \"smooth\", 500]} \r\n");
             outp.write(("{ \"id\": 1, \"method\": \"toggle\", \"params\":[\"" + "on" + "\", \"smooth\", 500]} \r\n").getBytes());
             outp.flush();
             byte[] buffer = new byte[1024];

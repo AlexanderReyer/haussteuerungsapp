@@ -6,46 +6,85 @@
     android:layout_height="match_parent"
     tools:context="com.example.xander.haussteuerung.MainActivity">
 
-    <EditText
-        android:id="@+id/edtOutput"
-        android:layout_width="800dp"
-        android:layout_height="400dp"
-        android:ems="10"
-        android:focusedByDefault="false"
-        android:inputType="textMultiLine"
-        android:textAlignment="textStart"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="75dp" />
-
-    <Button
-        android:id="@+id/btnSSDP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusedByDefault="true"
-        android:text="SSDP Geräte suchen"
-        android:textAlignment="center"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="9dp" />
-
     <LinearLayout
-        android:id="@+id/llButtons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
-        android:layout_marginEnd="256dp"
-        android:gravity="right|center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"></LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rlButtons"
-        android:layout_width="295dp"
-        android:layout_height="456dp"
-        android:gravity="top|left|fill_horizontal"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="75dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/btnSSDP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ssdp_ger_te_suchen"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="9dp" />
+
+            <Button
+                android:id="@+id/btnPlug"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sonoff" />
+
+            <Button
+                android:id="@+id/btnExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ende"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/logo"
+                app:srcCompat="@android:drawable/btn_star_big_on" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edtOutput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:enabled="true"
+                    android:focusable="false"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="horizontal"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

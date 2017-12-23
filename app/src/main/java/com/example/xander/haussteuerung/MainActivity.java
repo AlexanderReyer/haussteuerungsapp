@@ -19,21 +19,24 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnSSDPsearch;
-    TextView edtOutput;
-    SSDPsearch objSSDPSearch;
-    TCPConn objTCPConn;
-    ArrayList<device> arDevices = new ArrayList<>();
+    Button              btnSSDPsearch;
+    Button              btnPlug;
+    Button              btnExit;
+    TextView            edtOutput;
+    SSDPsearch          objSSDPSearch;
+    TCPConn             objTCPConn;
+    HTTPConn            objHTTPConn;
+    ArrayList<device>   arDevices = new ArrayList<>();
 
 
 
     public void show_IPPortButtons()
     {
         objTCPConn = new TCPConn(0, objSSDPSearch);
-        RelativeLayout rl = findViewById(R.id.rlButtons);
+        //RelativeLayout rl = findViewById(R.id.rlButtons);
         LinearLayout li =  findViewById(R.id.llButtons);
         RelativeLayout.LayoutParams lpr = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
         //lp.addRule(RelativeLayout.ALIGN_LEFT);
 
         li.removeAllViews();
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
             btnYeelight.setText(d.ip );
             btnYeelight.setId(d.id);
+            lp.weight = 1.0f;
+            btnYeelight.setLayoutParams(lp);
             li.addView(btnYeelight, lp);
 
             btnYeelight.setOnClickListener(new View.OnClickListener() {
@@ -70,10 +75,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        edtOutput = (TextView) findViewById(R.id.edtOutput);
+        edtOutput = findViewById(R.id.edtOutput);
         edtOutput.clearFocus();
+        objHTTPConn = new HTTPConn();
         objSSDPSearch = new SSDPsearch(edtOutput, arDevices);
-        btnSSDPsearch = (Button) findViewById(R.id.btnSSDP);
+        btnSSDPsearch = findViewById(R.id.btnSSDP);
         btnSSDPsearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +95,31 @@ public class MainActivity extends AppCompatActivity {
                 {
                     edtOutput.setText(e.toString());
                 }
+            }
+        });
+        btnPlug = findViewById(R.id.btnPlug);
+        btnPlug.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try
+                {
+                    Thread t = new Thread(objHTTPConn);
+                    t.start();
+                    Thread.sleep(2000);
+                    edtOutput.setText(objHTTPConn.result);
+                }
+                catch(Exception e)
+                {
+                    edtOutput.setText(e.toString());
+                }
+            }
+        });
+        btnExit = findViewById(R.id.btnExit);
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                System.exit(0);
             }
         });
     }

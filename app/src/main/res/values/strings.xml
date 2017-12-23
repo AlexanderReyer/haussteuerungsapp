@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">haussteuerung</string>
+    <string name="logo">Logo</string>
+    <string name="ende">Ende</string>
+    <string name="ssdp_ger_te_suchen">SSDP Geräte suchen</string>
+    <string name="sonoff">Sonoff</string>
 </resources>
