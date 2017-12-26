@@ -17,6 +17,7 @@ public class TCPConn implements Runnable{
     public String strOutput;
     public int i = 0;
     public SSDPsearch objSSDPSearch;
+    public String yeelightcommandstring;
 
     public TCPConn(int pi, SSDPsearch pSSDPSearch)
     {
@@ -27,6 +28,11 @@ public class TCPConn implements Runnable{
     public void run()
     {
         toggle_yeelight(i, objSSDPSearch);
+    }
+
+    public void build_yeelightcommandstring(int id, String method, String params)
+    {
+        yeelightcommandstring = ("{ \"id\": " + id + ", \"method\": \"" + method + "\", \"params\":[" + params + "]} \r\n");
     }
 
     public void toggle_yeelight(int i, SSDPsearch objSSDPSearch)
@@ -45,9 +51,12 @@ public class TCPConn implements Runnable{
             OutputStream outp = conn.getOutputStream();
             InputStream inp = conn.getInputStream();
 
-            Log.d("toogle_yeelight", "gesendet: " + ("{ \"id\": 1, \"method\": \"toggle\", \"params\":[\"" + i + "\", \"smooth\", 500]} \r\n"));
-            strOutput += ("{ \"id\": 1, \"method\": \"toggle\", \"params\":[\"" + i + "\", \"smooth\", 500]} \r\n");
-            outp.write(("{ \"id\": 1, \"method\": \"toggle\", \"params\":[\"" + "on" + "\", \"smooth\", 500]} \r\n").getBytes());
+            //Log.d("toogle_yeelight", "gesendet: " + ("{ \"id\": 1, \"method\": \"toggle\", \"params\":[\"" + i + "\", \"smooth\", 500]} \r\n"));
+            //strOutput += ("{ \"id\": 1, \"method\": \"toggle\", \"params\":[\"" + i + "\", \"smooth\", 500]} \r\n");
+            //outp.write(("{ \"id\": 1, \"method\": \"toggle\", \"params\":[\"" + "on" + "\", \"smooth\", 500]} \r\n").getBytes());
+            strOutput += " yeelightcommandstring: " + yeelightcommandstring + "\r\n";
+            Log.d("toggle_yee:", strOutput);
+            outp.write(yeelightcommandstring.getBytes());
             outp.flush();
             byte[] buffer = new byte[1024];
             int count = inp.read(buffer, 0, 1023);

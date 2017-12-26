@@ -93,12 +93,12 @@ public class SSDPsearch implements Runnable{
                             if(!arrayListcontainsIP(dev.ip))
                             {
                                 arDevices.add(dev);
+                                i++;
                             }
                         }
                         Log.d("app", new String(dPacket.getData(), 0, dPacket.getLength() ));
                         //System.out.println(new String(dPacket.getData(), 0, dPacket.getLength() ));
                         strOutput += (new String(dPacket.getData(), 0, dPacket.getLength()));
-                        i++;
                     }
                     }
                 catch (SocketTimeoutException e) {
